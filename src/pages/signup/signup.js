@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 import Input from "../../components/Input/Input";
 import styles from "./signup.module.css";
 import validateForm from "../../utils/validateForm";
@@ -10,15 +12,29 @@ const Signup = () => {
     password: "",
   });
   const [errors, setErrors] = useState({});
+
+  let history = useHistory();
+
   const handleInputChange = (e) => {
     const name = e.target.name;
-    setForm((prevForm) => ({ ...prevForm, [name]: e.target.value }));
+    const value = e.target.value;
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setErrors({});
     const errors = validateForm(form);
-    if (Object.keys(errors) !== 0) setErrors(errors);
+    if (Object.keys(errors).length !== 0) return setErrors(errors);
+    axios
+      .post("http://localhost:5000/signup", form)
+      .then((res) => history.push("/login"))
+      .catch((err) => {
+        const error = err.response.data.data;
+        setErrors((prevErrors) => ({ ...prevErrors, ...error }));
+      });
   };
+
   return (
     <div className={styles.signup}>
       <form className={styles.signup_form} onSubmit={handleFormSubmit}>
