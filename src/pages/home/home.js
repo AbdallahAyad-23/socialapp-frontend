@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "../../utils/axios";
+import Navbar from "../../components/Navbar/Navbar";
 const Home = () => {
+  const [posts, setPosts] = useState(null);
   useEffect(() => {
     console.log(axios.defaults);
     axios.get("/posts").then((res) => {
-      console.log(res.data);
+      setPosts(res.data.posts);
     });
   }, []);
-  return <div></div>;
+  return <ul>{posts && posts.map((post) => <li>{post.content}</li>)}</ul>;
 };
 
 export default Home;

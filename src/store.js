@@ -30,7 +30,11 @@ export const reducer = (state, action) => {
         isAuth: true,
         token: action.payload.token,
       };
-
+    case "setUser":
+      return {
+        ...state,
+        user: action.payload.user,
+      };
     case "logout":
       localStorage.clear();
       return {
