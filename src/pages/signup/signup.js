@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useHistory } from "react-router-dom";
 import Input from "../../components/Input/Input";
 import styles from "./signup.module.css";
@@ -27,7 +27,7 @@ const Signup = () => {
     const errors = validateForm(form);
     if (Object.keys(errors).length !== 0) return setErrors(errors);
     axios
-      .post("http://localhost:5000/signup", form)
+      .post("/signup", form)
       .then((res) => history.push("/login"))
       .catch((err) => {
         const error = err.response.data.data;

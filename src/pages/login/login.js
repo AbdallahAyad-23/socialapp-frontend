@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
+import axios from "../../utils/axios";
+import { AuthContext } from "../../store";
 import Input from "../../components/Input/Input";
 import GoogleButton from "../../components/GoogleButton/GoogleButton";
 import validateForm from "../../utils/validateForm";
 import styles from "./login.module.css";
 const Login = () => {
+  const { dispatch } = useContext(AuthContext);
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -23,11 +25,10 @@ const Login = () => {
     const errors = validateForm(form);
     if (Object.keys(errors).length !== 0) return setErrors(errors);
     axios
-      .post("http://localhost:5000/login", form)
+      .post("/login", form)
       .then((res) => {
         const token = res.data.token;
-        localStorage.setItem("token", token);
-        history.push("/");
+        dispatch({ type: "login", payload: { token } });
       })
       .catch((err) => {
         const error = err.response.data.data;
