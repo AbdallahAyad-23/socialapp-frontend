@@ -1,0 +1,73 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 15px;
+  background: #161a1d;
+  margin: 10px 0;
+  padding: 1rem;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #b1a7a615;
+  color: #f5f3f4;
+}
+
+.post_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post_author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.post_head_actions {
+  display: flex;
+  align-self: flex-start;
+  gap: 5px;
+}
+.post_edit {
+  color: #2d88ff;
+}
+.post_delete {
+  color: #ba181bee;
+}
+.author_img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.post_mid_actions {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  align-items: center;
+  border-top: 1px solid #b1a7a6;
+  border-bottom: 1px solid #b1a7a6;
+  padding: 8px 0;
+}
+.post_footer {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  color: #b1a7a6;
+}
+.comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment_input {
+  outline: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  width: 85%;
+  height: 100%;
+  background: #d3d3d3;
+  color: #0b090a;
+  border-radius: 20px;
+}
+.post i:hover {
+  cursor: pointer;
+}
