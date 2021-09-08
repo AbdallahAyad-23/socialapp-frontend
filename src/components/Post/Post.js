@@ -15,7 +15,7 @@ const Post = ({ post }) => {
     });
   }, []);
   useEffect(() => {
-    if (likes) {
+    if (likes && state.user) {
       console.log(likes);
       const isLiked =
         likes.filter(
@@ -30,20 +30,26 @@ const Post = ({ post }) => {
   const like = (postId) => {
     // dispatch({ type: "like", payload: { id: postId } });
     setLiked(true);
-    axios.post(`/posts/${postId}/likes`).then((res) => {
-      const newLike = res.data;
-      setLikes((prevLikes) => [...prevLikes, newLike]);
-    });
+    axios
+      .post(`/posts/${postId}/likes`)
+      .then((res) => {
+        const newLike = res.data;
+        setLikes((prevLikes) => [...prevLikes, newLike]);
+      })
+      .catch((err) => setLiked(false));
   };
 
   const unlike = (postId) => {
     // dispatch({ type: "unlike", payload: { id: postId } });
     setLiked(false);
-    axios.delete(`/posts/${postId}/likes`).then((res) => {
-      setLikes((prevLikes) =>
-        prevLikes.filter((like) => like._id !== res.data._id)
-      );
-    });
+    axios
+      .delete(`/posts/${postId}/likes`)
+      .then((res) => {
+        setLikes((prevLikes) =>
+          prevLikes.filter((like) => like._id !== res.data._id)
+        );
+      })
+      .catch((err) => setLiked(true));
   };
   const toggleShowComment = () => {
     setShowComment((prev) => !prev);

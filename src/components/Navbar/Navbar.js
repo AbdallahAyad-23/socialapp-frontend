@@ -3,10 +3,15 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../store";
 import styles from "./Navbar.module.css";
 const Navbar = () => {
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const navbar = state.isAuth ? (
     <li>
-      <NavLink to="/logout">Logout</NavLink>
+      <button
+        onClick={() => dispatch({ type: "logout" })}
+        className={styles.logout_btn}
+      >
+        Logout
+      </button>
     </li>
   ) : (
     <>
