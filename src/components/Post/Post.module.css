@@ -53,6 +53,10 @@
   font-size: 14px;
   color: #b1a7a6;
 }
+.comments {
+  display: flex;
+  flex-direction: column;
+}
 .comment {
   display: flex;
   align-items: center;
@@ -67,6 +71,9 @@
   background: #d3d3d3;
   color: #0b090a;
   border-radius: 20px;
+}
+.liked {
+  color: #2d88ff;
 }
 .post i:hover {
   cursor: pointer;

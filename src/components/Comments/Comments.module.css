@@ -1,0 +1,32 @@
+.comments {
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.spinner_div {
+  margin-top: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.comment_div {
+  color: #0b090a;
+  display: flex;
+  justify-content: space-between;
+}
+.comment {
+  background: #d3d3d3;
+  padding: 0.5rem 0.5rem;
+  border-radius: 20px;
+  width: 85%;
+}
+.author_img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
