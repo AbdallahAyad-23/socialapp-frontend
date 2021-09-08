@@ -9,13 +9,11 @@ const Post = ({ post }) => {
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
   const { state, dispatch } = useContext(AuthContext);
-
   useEffect(() => {
     axios.get(`/posts/${post._id}/likes`).then((res) => {
       setLikes(res.data);
     });
   }, []);
-
   useEffect(() => {
     if (likes) {
       console.log(likes);
@@ -30,16 +28,18 @@ const Post = ({ post }) => {
   }, [likes.length]);
 
   const like = (postId) => {
+    // dispatch({ type: "like", payload: { id: postId } });
+    setLiked(true);
     axios.post(`/posts/${postId}/likes`).then((res) => {
-      dispatch({ type: "like", payload: { id: postId } });
       const newLike = res.data;
       setLikes((prevLikes) => [...prevLikes, newLike]);
     });
   };
 
   const unlike = (postId) => {
+    // dispatch({ type: "unlike", payload: { id: postId } });
+    setLiked(false);
     axios.delete(`/posts/${postId}/likes`).then((res) => {
-      dispatch({ type: "unlike", payload: { id: postId } });
       setLikes((prevLikes) =>
         prevLikes.filter((like) => like._id !== res.data._id)
       );
@@ -81,16 +81,16 @@ const Post = ({ post }) => {
         <i onClick={toggleShowComment} className="far fa-comment-alt"></i>
       </div>
       <div className={styles.post_footer}>
-        {post.likesCount > 0 && (
+        {likes.length > 0 && (
           <p>
-            <span>{post.likesCount}</span> Likes
+            <span>{likes.length}</span> Likes
           </p>
         )}
-        {post.commentsCount > 0 && (
+        {/* {post.comments.length > 0 && (
           <p>
-            <span>{post.commentsCount}</span> Comments
+            <span>{post.comments.length}</span> Comments
           </p>
-        )}
+        )} */}
       </div>
       {showComment && (
         <div className={styles.comments}>
