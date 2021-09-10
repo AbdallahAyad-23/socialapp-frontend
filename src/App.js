@@ -31,26 +31,24 @@ function App() {
       <AuthContext.Provider value={{ state, dispatch }}>
         <Router>
           <Navbar />
-          <main>
-            {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />}
-            {state.isAuth && (
-              <Route path="/">
-                <Home />
-              </Route>
-            )}
+          {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />}
+          {state.isAuth && (
+            <Route path="/">
+              <Home />
+            </Route>
+          )}
 
-            {!state.isAuth && (
-              <Route path="/signup">
-                <Signup />
-              </Route>
-            )}
+          {!state.isAuth && (
+            <Route path="/signup">
+              <Signup />
+            </Route>
+          )}
 
-            {!state.isAuth && (
-              <Route path="/login">
-                <Login />
-              </Route>
-            )}
-          </main>
+          {!state.isAuth && (
+            <Route path="/login">
+              <Login />
+            </Route>
+          )}
         </Router>
       </AuthContext.Provider>
     </div>

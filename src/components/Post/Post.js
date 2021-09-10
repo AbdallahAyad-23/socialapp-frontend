@@ -6,6 +6,8 @@ import Comments from "../Comments/Comments";
 import styles from "./Post.module.css";
 const Post = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
+  const [comments, setComments] = useState([]);
+
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
   const { state, dispatch } = useContext(AuthContext);
@@ -92,24 +94,17 @@ const Post = ({ post }) => {
             <span>{likes.length}</span> Likes
           </p>
         )}
-        {/* {post.comments.length > 0 && (
+        {post.comments.length > 0 && (
           <p>
-            <span>{post.comments.length}</span> Comments
+            <span>
+              {comments.length ? comments.length : post.comments.length}
+            </span>{" "}
+            Comments
           </p>
-        )} */}
+        )}
       </div>
       {showComment && (
-        <div className={styles.comments}>
-          <div className={styles.comment}>
-            <img
-              className={styles.author_img}
-              src={`https://firebasestorage.googleapis.com/v0/b/connect-324011.appspot.com/o/${post.userId.imageUrl}?alt=media`}
-              alt="user"
-            />
-            <input className={styles.comment_input} type="text" />
-          </div>
-          <Comments postId={post._id} />
-        </div>
+        <Comments comments={comments} setComments={setComments} post={post} />
       )}
     </div>
   );

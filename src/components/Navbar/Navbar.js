@@ -24,7 +24,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <header>
+    <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles.nav_header}>
           <NavLink to="/">Connect</NavLink>

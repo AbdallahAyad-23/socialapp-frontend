@@ -1,4 +1,25 @@
 .comments {
+  display: flex;
+  flex-direction: column;
+}
+.comment_create {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.comment_input {
+  outline: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+  width: 85%;
+  height: 100%;
+  background: #d3d3d3;
+  color: #0b090a;
+  box-shadow: 1px 1px 1px #d3d3d30c;
+
+  border-radius: 20px;
+}
+.comments_list {
   margin-top: 10px;
   list-style: none;
   display: flex;
@@ -22,6 +43,7 @@
   background: #d3d3d3;
   padding: 0.5rem 0.5rem;
   border-radius: 20px;
+  box-shadow: 1px 1px 1px #d3d3d30c;
   width: 85%;
 }
 .author_img {

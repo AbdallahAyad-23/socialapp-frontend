@@ -1,6 +1,6 @@
 .home {
   display: flex;
   justify-content: center;
-  align-items: center;
+  grid-row: 2/3;
   background: #0b090a;
 }
