@@ -54,7 +54,17 @@ const Post = ({ post }) => {
       .catch((err) => setLiked(true));
   };
 
-  const editPost = () => {};
+  const editPost = (e, content) => {
+    e.preventDefault();
+    if (post.content !== content && content.length !== 0) {
+      axios.put(`/posts/${post._id}`, { content }).then((res) => {
+        setShowEdit(false);
+        const newPost = res.data;
+        newPost.userId = state.user;
+        dispatch({ type: "EDIT_POST", payload: { newPost } });
+      });
+    }
+  };
 
   const deletePost = (postId) => {
     axios.delete(`/posts/${postId}`).then((res) => {

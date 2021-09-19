@@ -41,6 +41,16 @@ export const reducer = (state, action) => {
         ...state,
         posts: [action.payload, ...state.posts],
       };
+    case "EDIT_POST":
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id == action.payload.newPost._id) {
+            return action.payload.newPost;
+          }
+          return post;
+        }),
+      };
     case "DELETE_POST":
       return {
         ...state,
