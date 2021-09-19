@@ -30,7 +30,6 @@ const Post = ({ post }) => {
   }, [likes.length]);
 
   const like = (postId) => {
-    // dispatch({ type: "like", payload: { id: postId } });
     setLiked(true);
     axios
       .post(`/posts/${postId}/likes`)
@@ -42,7 +41,6 @@ const Post = ({ post }) => {
   };
 
   const unlike = (postId) => {
-    // dispatch({ type: "unlike", payload: { id: postId } });
     setLiked(false);
     axios
       .delete(`/posts/${postId}/likes`)
@@ -53,6 +51,13 @@ const Post = ({ post }) => {
       })
       .catch((err) => setLiked(true));
   };
+
+  const deletePost = (postId) => {
+    axios.delete(`/posts/${postId}`).then((res) => {
+      dispatch({ type: "DELETE_POST", payload: { id: res.data._id } });
+    });
+  };
+
   const toggleShowComment = () => {
     setShowComment((prev) => !prev);
   };
@@ -71,10 +76,15 @@ const Post = ({ post }) => {
             <p className={styles.post_date}>{post.createdAt}</p>
           </div>
         </div>
-        <div className={styles.post_head_actions}>
-          <i className={`far fa-edit ${styles.post_edit}`}></i>
-          <i className={`far fa-trash-alt ${styles.post_delete}`}></i>
-        </div>
+        {state.user.userId == post.userId.userId && (
+          <div className={styles.post_head_actions}>
+            <i className={`far fa-edit ${styles.post_edit}`}></i>
+            <i
+              onClick={() => deletePost(post._id)}
+              className={`far fa-trash-alt ${styles.post_delete}`}
+            ></i>
+          </div>
+        )}
       </div>
       <div className={styles.post_content}>{post.content}</div>
       <div className={styles.post_mid_actions}>

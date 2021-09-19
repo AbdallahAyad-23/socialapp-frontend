@@ -41,6 +41,11 @@ export const reducer = (state, action) => {
         ...state,
         posts: [action.payload, ...state.posts],
       };
+    case "DELETE_POST":
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id != action.payload.id),
+      };
     case "SET_USER":
       return {
         ...state,
