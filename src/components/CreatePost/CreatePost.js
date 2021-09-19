@@ -1,15 +1,35 @@
 import React, { useContext, useState } from "react";
+import axios from "../../utils/axios";
 import styles from "./CreatePost.module.css";
 import { AuthContext } from "../../store";
 import Backdrop from "../Backdrop/Backdrop";
 import CreatePostForm from "../CreatePostForm/CreatePostForm";
 const CreatePost = () => {
-  const { state } = useContext(AuthContext);
+  const { state, dispatch } = useContext(AuthContext);
   const [showCreate, setShowCreate] = useState(false);
+
+  const createPost = (e, content) => {
+    e.preventDefault();
+    if (content.length !== 0) {
+      axios.post("/posts", { content }).then((res) => {
+        setShowCreate(false);
+        const newPost = res.data;
+        newPost.userId = state.user;
+        dispatch({ type: "ADD_POST", payload: newPost });
+      });
+    }
+  };
   return (
     <>
-      {showCreate && <Backdrop setShowCreate={setShowCreate} />}
-      {showCreate && <CreatePostForm setShowCreate={setShowCreate} />}
+      {showCreate && <Backdrop setShow={setShowCreate} />}
+      {showCreate && (
+        <CreatePostForm
+          intialContent=""
+          fn={createPost}
+          title="Create Post"
+          btn="Post"
+        />
+      )}
       <div className={styles.create_post}>
         <img
           className={styles.author_img}

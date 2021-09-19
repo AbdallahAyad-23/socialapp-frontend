@@ -3,11 +3,13 @@ import axios from "../../utils/axios";
 import { DateTime } from "luxon";
 import { AuthContext } from "../../store";
 import Comments from "../Comments/Comments";
+import Backdrop from "../Backdrop/Backdrop";
+import CreatePostForm from "../CreatePostForm/CreatePostForm";
 import styles from "./Post.module.css";
 const Post = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
   const [comments, setComments] = useState([]);
-
+  const [showEdit, setShowEdit] = useState(false);
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
   const { state, dispatch } = useContext(AuthContext);
@@ -52,6 +54,8 @@ const Post = ({ post }) => {
       .catch((err) => setLiked(true));
   };
 
+  const editPost = () => {};
+
   const deletePost = (postId) => {
     axios.delete(`/posts/${postId}`).then((res) => {
       dispatch({ type: "DELETE_POST", payload: { id: res.data._id } });
@@ -64,6 +68,15 @@ const Post = ({ post }) => {
 
   return (
     <div className={styles.post}>
+      {showEdit && <Backdrop setShow={setShowEdit} />}
+      {showEdit && (
+        <CreatePostForm
+          fn={editPost}
+          title="Edit Post"
+          btn="Edit"
+          intialContent={post.content}
+        />
+      )}
       <div className={styles.post_head}>
         <div className={styles.post_author}>
           <img
@@ -78,7 +91,10 @@ const Post = ({ post }) => {
         </div>
         {state.user.userId == post.userId.userId && (
           <div className={styles.post_head_actions}>
-            <i className={`far fa-edit ${styles.post_edit}`}></i>
+            <i
+              onClick={() => setShowEdit(true)}
+              className={`far fa-edit ${styles.post_edit}`}
+            ></i>
             <i
               onClick={() => deletePost(post._id)}
               className={`far fa-trash-alt ${styles.post_delete}`}
