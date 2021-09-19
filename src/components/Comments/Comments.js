@@ -1,6 +1,7 @@
 import axios from "../../utils/axios";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store";
+import Comment from "../Comment/Comment";
 import Spinner from "../Spinner/Spinner";
 import styles from "./Comments.module.css";
 const Comments = ({ post, comments, setComments }) => {
@@ -27,6 +28,16 @@ const Comments = ({ post, comments, setComments }) => {
         });
     }
   };
+  const deleteComment = (commentId) => {
+    axios.delete(`/posts/${post._id}/comments/${commentId}`).then((res) => {
+      const deletedComment = res.data;
+      setComments((prevComments) => {
+        return prevComments.filter(
+          (comment) => comment._id != deletedComment._id
+        );
+      });
+    });
+  };
   return (
     <div className={styles.comments}>
       {state.user && (
@@ -49,17 +60,7 @@ const Comments = ({ post, comments, setComments }) => {
       <ul className={`${comments ? styles.comments_list : styles.spinner_div}`}>
         {comments ? (
           comments.map((comment) => (
-            <li className={styles.comment_div} key={comment._id}>
-              <img
-                className={styles.author_img}
-                src={`https://firebasestorage.googleapis.com/v0/b/connect-324011.appspot.com/o/${comment.userId.imageUrl}?alt=media`}
-                alt="user"
-              />
-              <div className={styles.comment}>
-                <h5>{comment.userId.username}</h5>
-                <p>{comment.content}</p>
-              </div>
-            </li>
+            <Comment comment={comment} deleteComment={deleteComment} />
           ))
         ) : (
           <Spinner />

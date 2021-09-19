@@ -21,6 +21,7 @@
 
   border-radius: 20px;
 }
+
 .comments_list {
   margin-top: 10px;
   list-style: none;
@@ -36,18 +37,7 @@
   gap: 10px;
   align-items: center;
 }
-.comment_div {
-  color: #0b090a;
-  display: flex;
-  justify-content: space-between;
-}
-.comment {
-  background: #d3d3d3;
-  padding: 0.5rem 0.5rem;
-  border-radius: 20px;
-  box-shadow: 1px 1px 1px #d3d3d30c;
-  width: 85%;
-}
+
 .author_img {
   height: 40px;
   width: 40px;

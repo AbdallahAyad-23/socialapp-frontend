@@ -99,7 +99,7 @@ const Post = ({ post }) => {
             <p className={styles.post_date}>{post.createdAt}</p>
           </div>
         </div>
-        {state.user.userId == post.userId.userId && (
+        {state.user._id == post.userId._id && (
           <div className={styles.post_head_actions}>
             <i
               onClick={() => setShowEdit(true)}
