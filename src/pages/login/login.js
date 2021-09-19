@@ -28,7 +28,7 @@ const Login = () => {
       .post("/login", form)
       .then((res) => {
         const token = res.data.token;
-        dispatch({ type: "login", payload: { token } });
+        dispatch({ type: "LOGIN", payload: { token } });
       })
       .catch((err) => {
         const error = err.response.data.data;

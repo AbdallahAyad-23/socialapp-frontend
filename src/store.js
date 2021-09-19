@@ -11,7 +11,7 @@ export const intialState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case "login":
+    case "LOGIN":
       localStorage.setItem("token", action.payload.token);
       axios.defaults.headers.common[
         "Authorization"
@@ -22,7 +22,7 @@ export const reducer = (state, action) => {
         token: action.payload.token,
       };
 
-    case "intial":
+    case "INTIAL":
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${action.payload.token}`;
@@ -31,17 +31,22 @@ export const reducer = (state, action) => {
         isAuth: true,
         token: action.payload.token,
       };
-    case "setPosts":
+    case "SET_POSTS":
       return {
         ...state,
         posts: action.payload.posts,
       };
-    case "setUser":
+    case "ADD_POST":
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts],
+      };
+    case "SET_USER":
       return {
         ...state,
         user: action.payload.user,
       };
-    case "like":
+    case "LIKE":
       return {
         ...state,
         posts: state.posts.map((post) => {
@@ -54,7 +59,7 @@ export const reducer = (state, action) => {
           return post;
         }),
       };
-    case "unlike":
+    case "UNLIKE":
       return {
         ...state,
         posts: state.posts.map((post) => {
@@ -67,7 +72,7 @@ export const reducer = (state, action) => {
           return post;
         }),
       };
-    case "logout":
+    case "LOGOUT":
       localStorage.clear();
       return {
         ...state,

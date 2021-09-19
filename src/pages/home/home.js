@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import Post from "../../components/Post/Post";
+import CreatePost from "../../components/CreatePost/CreatePost";
 import { AuthContext } from "../../store";
 import styles from "./home.module.css";
 
@@ -12,12 +13,13 @@ const Home = () => {
 
   useEffect(() => {
     axios.get("/posts").then((res) => {
-      dispatch({ type: "setPosts", payload: { posts: res.data.posts } });
+      dispatch({ type: "SET_POSTS", payload: { posts: res.data.posts } });
     });
   }, []);
 
   return (
     <div className={styles.home}>
+      <CreatePost />
       <ul className={styles.posts}>
         {state.posts &&
           state.posts.map((post) => <Post key={post._id} post={post} />)}

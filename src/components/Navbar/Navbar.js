@@ -7,7 +7,7 @@ const Navbar = () => {
   const navbar = state.isAuth ? (
     <li>
       <button
-        onClick={() => dispatch({ type: "logout" })}
+        onClick={() => dispatch({ type: "LOGOUT" })}
         className={styles.logout_btn}
       >
         Logout

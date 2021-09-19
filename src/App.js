@@ -16,11 +16,11 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) {
       if (Date.now() <= jwtDecode(token).exp * 1000) {
-        dispatch({ type: "intial", payload: { token } });
+        dispatch({ type: "INTIAL", payload: { token } });
         axios.get("/user").then((res) => {
           console.log(res);
           const user = res.data;
-          dispatch({ type: "setUser", payload: { user } });
+          dispatch({ type: "SET_USER", payload: { user } });
         });
       }
     }
@@ -32,7 +32,7 @@ function App() {
         <Router>
           <Navbar />
           {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />}
-          {state.isAuth && (
+          {state.isAuth && state.user && (
             <Route path="/">
               <Home />
             </Route>

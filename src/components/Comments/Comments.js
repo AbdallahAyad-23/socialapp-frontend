@@ -29,22 +29,23 @@ const Comments = ({ post, comments, setComments }) => {
   };
   return (
     <div className={styles.comments}>
-      <div className={styles.comment_create}>
-        {state.user && (
+      {state.user && (
+        <div className={styles.comment_create}>
           <img
             className={styles.author_img}
             src={`https://firebasestorage.googleapis.com/v0/b/connect-324011.appspot.com/o/${state.user.imageUrl}?alt=media`}
             alt="user"
           />
-        )}
-        <input
-          className={styles.comment_input}
-          onChange={commentChangeHandler}
-          onKeyUp={createComment}
-          value={comment}
-          type="text"
-        />
-      </div>
+          <input
+            className={styles.comment_input}
+            onChange={commentChangeHandler}
+            onKeyUp={createComment}
+            placeholder="Write a comment..."
+            value={comment}
+            type="text"
+          />
+        </div>
+      )}
       <ul
         className={`${
           comments.length > 0 ? styles.comments_list : styles.spinner_div

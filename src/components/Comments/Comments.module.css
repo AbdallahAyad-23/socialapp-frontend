@@ -9,6 +9,8 @@
 }
 .comment_input {
   outline: none;
+  font-family: inherit;
+  font-size: 14px;
   border: none;
   padding: 0.5rem 0.5rem;
   width: 85%;
