@@ -8,7 +8,7 @@ import CreatePostForm from "../CreatePostForm/CreatePostForm";
 import styles from "./Post.module.css";
 const Post = ({ post }) => {
   const [showComment, setShowComment] = useState(false);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(null);
   const [showEdit, setShowEdit] = useState(false);
   const [likes, setLikes] = useState([]);
   const [liked, setLiked] = useState(false);
@@ -130,11 +130,9 @@ const Post = ({ post }) => {
             <span>{likes.length}</span> Likes
           </p>
         )}
-        {post.comments.length > 0 && (
+        {(post.comments.length > 0 || (comments && comments.length > 0)) && (
           <p>
-            <span>
-              {comments.length ? comments.length : post.comments.length}
-            </span>{" "}
+            <span>{comments ? comments.length : post.comments.length}</span>{" "}
             Comments
           </p>
         )}

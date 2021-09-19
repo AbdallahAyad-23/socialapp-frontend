@@ -46,12 +46,8 @@ const Comments = ({ post, comments, setComments }) => {
           />
         </div>
       )}
-      <ul
-        className={`${
-          comments.length > 0 ? styles.comments_list : styles.spinner_div
-        }`}
-      >
-        {comments.length > 0 ? (
+      <ul className={`${comments ? styles.comments_list : styles.spinner_div}`}>
+        {comments ? (
           comments.map((comment) => (
             <li className={styles.comment_div} key={comment._id}>
               <img
