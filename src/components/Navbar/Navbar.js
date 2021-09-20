@@ -39,7 +39,7 @@ const Navbar = () => {
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles.nav_header}>
-          <NavLink to="/">Connect</NavLink>
+          <NavLink to={state.isAuth ? "/" : "#"}>Connect</NavLink>
         </div>
         <ul className={styles.navbar}>{navbar}</ul>
       </nav>

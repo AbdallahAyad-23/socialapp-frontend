@@ -25,7 +25,7 @@ function App() {
         });
       }
     }
-  }, []);
+  }, [state.isAuth]);
 
   return (
     <div className="App">
