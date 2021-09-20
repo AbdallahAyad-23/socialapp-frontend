@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Signup from "./pages/signup/signup";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
+import Profile from "./pages/profile/profile";
 import axios from "./utils/axios";
 
 function App() {
@@ -33,9 +34,14 @@ function App() {
           <Navbar />
           {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />}
           {state.isAuth && state.user && (
-            <Route path="/">
-              <Home />
-            </Route>
+            <>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route path="/profile" exact>
+                <Profile />
+              </Route>
+            </>
           )}
 
           {!state.isAuth && (

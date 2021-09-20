@@ -51,6 +51,16 @@ export const reducer = (state, action) => {
           return post;
         }),
       };
+    case "NEW_PROFILE":
+      return {
+        ...state,
+        user: { ...state.user, imageUrl: action.payload.newProfileImg },
+      };
+    case "UPDATE_POSTS":
+      return {
+        ...state,
+        posts: state.posts.map((post) => ({ ...post, userId: state.user })),
+      };
     case "DELETE_POST":
       return {
         ...state,

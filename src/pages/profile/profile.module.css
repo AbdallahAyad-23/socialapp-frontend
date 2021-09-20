@@ -1,0 +1,32 @@
+.profile {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  grid-row: 2/3;
+  background: #0b090a;
+  padding-top: 10px;
+}
+.profile_img_div {
+  position: relative;
+}
+.profile_img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+}
+.file_input_icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #161a1d;
+  background: #d3d3d3;
+  padding: 10px;
+  border-radius: 50%;
+}
+.file_input_icon:hover {
+  cursor: pointer;
+}
