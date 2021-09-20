@@ -38,6 +38,24 @@ const Comments = ({ post, comments, setComments }) => {
       });
     });
   };
+
+  const editComment = (commentId, content) => {
+    axios
+      .put(`/posts/${post._id}/comments/${commentId}`, { content })
+      .then((res) => {
+        console.log(res.data);
+        const newComment = res.data;
+        newComment.userId = state.user;
+        setComments((prevComments) => {
+          return prevComments.map((prevComment) => {
+            if (prevComment._id.toString() === newComment._id.toString()) {
+              return newComment;
+            }
+            return prevComment;
+          });
+        });
+      });
+  };
   return (
     <div className={styles.comments}>
       {state.user && (
@@ -60,7 +78,12 @@ const Comments = ({ post, comments, setComments }) => {
       <ul className={`${comments ? styles.comments_list : styles.spinner_div}`}>
         {comments ? (
           comments.map((comment) => (
-            <Comment comment={comment} deleteComment={deleteComment} />
+            <Comment
+              comment={comment}
+              deleteComment={deleteComment}
+              editComment={editComment}
+              key={comment._id}
+            />
           ))
         ) : (
           <Spinner />

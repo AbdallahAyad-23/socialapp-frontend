@@ -32,3 +32,20 @@
 .comment_delete {
   color: #ba181bee;
 }
+.edit_div {
+  display: flex;
+  flex-direction: column;
+}
+.edit_div .edit_done {
+  align-self: flex-end;
+}
+.edit_area {
+  background: none;
+  resize: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  outline: none;
+  overflow-y: hidden;
+}
