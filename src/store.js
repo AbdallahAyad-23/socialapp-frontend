@@ -7,6 +7,7 @@ export const intialState = {
   token: null,
   user: null,
   posts: null,
+  requests: null,
 };
 
 export const reducer = (state, action) => {
@@ -70,6 +71,34 @@ export const reducer = (state, action) => {
       return {
         ...state,
         user: action.payload.user,
+      };
+    case "SET_REQUESTS":
+      return {
+        ...state,
+        requests: action.payload.friendRequests,
+      };
+    case "UPDATE_REQUESTS":
+      return {
+        ...state,
+        requests: state.requests.filter(
+          (request) =>
+            request._id.toString() !== action.payload.requestId.toString()
+        ),
+      };
+    case "ACCEPT_REQUEST":
+      return {
+        ...state,
+        requests: state.requests.map((request) => {
+          if (request._id.toString() !== action.payload.requestId.toString()) {
+            return request;
+          }
+          return { ...request, status: 3 };
+        }),
+      };
+    case "ADD_FRIEND":
+      return {
+        ...state,
+        requests: [...state.requests, action.payload.request],
       };
     case "LIKE":
       return {

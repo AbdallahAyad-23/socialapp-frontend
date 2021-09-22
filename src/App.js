@@ -8,6 +8,7 @@ import Signup from "./pages/signup/signup";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import Profile from "./pages/profile/profile";
+import Users from "./pages/users/users";
 import axios from "./utils/axios";
 
 function App() {
@@ -25,14 +26,14 @@ function App() {
         });
       }
     }
-  }, [state.isAuth]);
+  }, []);
 
   return (
     <div className="App">
       <AuthContext.Provider value={{ state, dispatch }}>
         <Router>
           <Navbar />
-          {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />}
+          {/* {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />} */}
           {state.isAuth && state.user && (
             <>
               <Route path="/" exact>
@@ -40,6 +41,9 @@ function App() {
               </Route>
               <Route path="/profile" exact>
                 <Profile />
+              </Route>
+              <Route path="/users" exact>
+                <Users />
               </Route>
             </>
           )}

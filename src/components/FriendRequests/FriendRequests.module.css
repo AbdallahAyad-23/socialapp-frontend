@@ -1,0 +1,56 @@
+.friend_requests {
+  background: #161a1d;
+  color: white;
+  padding: 10px;
+  width: auto;
+  position: absolute;
+  top: 51px;
+  right: 0;
+  overflow-y: auto;
+  height: auto;
+  max-height: 200px;
+}
+
+.friend_requests_list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.request {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.request .btn {
+  border: 1px solid white;
+  border: none;
+  font-family: inherit;
+  padding: 4px;
+  font-weight: 700;
+  background: white;
+  /* background: none;
+  color: white; */
+  color: #161a1d;
+  outline: none;
+  border-radius: 8px;
+}
+.request .btn:hover {
+  cursor: pointer;
+  color: white;
+  background: #161a1d;
+}
+.request_div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 100%;
+}

@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../store";
+import FriendRequests from "../FriendRequests/FriendRequests";
 import styles from "./Navbar.module.css";
 const Navbar = () => {
   const { state, dispatch } = useContext(AuthContext);
+  const [showRequests, setShowRequests] = useState(false);
   const navbar =
     state.isAuth && state.user ? (
       <>
@@ -17,9 +19,20 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/users">Users</NavLink>
+        </li>
+        <li>
+          <button
+            onClick={() => setShowRequests((prevShow) => !prevShow)}
+            className={styles.btn}
+          >
+            Requests
+          </button>
+        </li>
+        <li>
           <button
             onClick={() => dispatch({ type: "LOGOUT" })}
-            className={styles.logout_btn}
+            className={styles.btn}
           >
             Logout
           </button>
@@ -43,6 +56,7 @@ const Navbar = () => {
         </div>
         <ul className={styles.navbar}>{navbar}</ul>
       </nav>
+      {showRequests && <FriendRequests />}
     </header>
   );
 };

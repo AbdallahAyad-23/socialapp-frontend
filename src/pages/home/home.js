@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "../../utils/axios";
 import Post from "../../components/Post/Post";
+import FriendRequests from "../../components/FriendRequests/FriendRequests";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import { AuthContext } from "../../store";
 import styles from "./home.module.css";

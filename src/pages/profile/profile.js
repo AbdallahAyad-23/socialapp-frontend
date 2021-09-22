@@ -1,10 +1,17 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styles from "./profile.module.css";
 import Post from "../../components/Post/Post";
 import { AuthContext } from "../../store";
 import axios from "../../utils/axios";
 const Profile = () => {
   const { state, dispatch } = useContext(AuthContext);
+  useEffect(() => {
+    if (!state.posts) {
+      axios.get("/posts").then((res) => {
+        dispatch({ type: "SET_POSTS", payload: { posts: res.data.posts } });
+      });
+    }
+  }, []);
   const fileRef = useRef(null);
   const handleFileUpload = (e) => {
     const file = e.target.files[0];

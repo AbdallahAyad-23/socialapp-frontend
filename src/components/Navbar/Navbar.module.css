@@ -1,5 +1,6 @@
 .header {
   grid-row: 1/2;
+  position: relative;
 }
 .nav {
   display: flex;
@@ -27,13 +28,13 @@
   gap: 10px;
   align-items: center;
 }
-.logout_btn {
+.btn {
   color: #fff;
   font: inherit;
   border: none;
   background: none;
 }
-.logout_btn:hover {
+.btn:hover {
   cursor: pointer;
 }
 .profile_img {
