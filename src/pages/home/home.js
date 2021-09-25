@@ -30,7 +30,7 @@ const Home = () => {
               .map((post) => <Post key={post._id} post={post} />)
           : Array(5)
               .fill(0)
-              .map((_) => <PostSkeleton />)}
+              .map((_, i) => <PostSkeleton key={i} />)}
       </ul>
     </div>
   );
