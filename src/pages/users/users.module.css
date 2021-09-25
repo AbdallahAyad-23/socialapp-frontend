@@ -54,3 +54,8 @@
   color: white;
   background: #161a1d;
 }
+@media (max-width: 500px) {
+  .users_list {
+    width: 100%;
+  }
+}
