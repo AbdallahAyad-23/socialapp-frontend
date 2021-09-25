@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 import { useEffect, useReducer } from "react";
 import jwtDecode from "jwt-decode";
 import "./App.css";
@@ -33,7 +38,6 @@ function App() {
       <AuthContext.Provider value={{ state, dispatch }}>
         <Router>
           <Navbar />
-          {/* {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />} */}
           {state.isAuth && state.user && (
             <>
               <Route path="/" exact>
@@ -47,6 +51,7 @@ function App() {
               </Route>
             </>
           )}
+          {state.isAuth ? <Redirect to="/" /> : <Redirect to="/login" />}
 
           {!state.isAuth && (
             <Route path="/signup">

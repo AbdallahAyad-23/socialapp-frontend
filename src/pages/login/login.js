@@ -29,6 +29,12 @@ const Login = () => {
       .then((res) => {
         const token = res.data.token;
         dispatch({ type: "LOGIN", payload: { token } });
+        axios.get("/user").then((res) => {
+          console.log(res);
+          const user = res.data;
+          dispatch({ type: "SET_USER", payload: { user } });
+          history.push("/");
+        });
       })
       .catch((err) => {
         const error = err.response.data.data;

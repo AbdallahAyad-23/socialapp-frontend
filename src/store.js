@@ -132,6 +132,8 @@ export const reducer = (state, action) => {
         ...state,
         isAuth: false,
         token: "",
+        user: null,
+        posts: null,
       };
     default:
       return state;
