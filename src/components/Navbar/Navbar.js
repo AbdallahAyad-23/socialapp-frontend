@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../store";
+import Backdrop from "../Backdrop/Backdrop";
 import FriendRequests from "../FriendRequests/FriendRequests";
 import styles from "./Navbar.module.css";
 const Navbar = () => {
   const { state, dispatch } = useContext(AuthContext);
   const [showRequests, setShowRequests] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false);
   const navbar =
     state.isAuth && state.user ? (
       <>
@@ -49,15 +51,29 @@ const Navbar = () => {
       </>
     );
   return (
-    <header className={styles.header}>
-      <nav className={styles.nav}>
-        <div className={styles.nav_header}>
-          <NavLink to={state.isAuth ? "/" : "#"}>Connect</NavLink>
-        </div>
-        <ul className={styles.navbar}>{navbar}</ul>
-      </nav>
-      {showRequests && <FriendRequests />}
-    </header>
+    <>
+      <header className={styles.header}>
+        <nav className={styles.nav}>
+          <div className={styles.nav_header}>
+            <NavLink to={state.isAuth ? "/" : "#"}>Connect</NavLink>
+          </div>
+          <ul className={styles.navbar}>{navbar}</ul>
+          <i
+            className={`fas fa-bars ${styles.side_bar_btn}`}
+            onClick={() => setShowSideBar(true)}
+          ></i>
+        </nav>
+        {showRequests && <FriendRequests />}
+      </header>
+      {showSideBar && (
+        <>
+          <Backdrop setShow={setShowSideBar} />
+          <div className={styles.side_bar}>
+            <ul className={styles.side_bar_items}>{navbar}</ul>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

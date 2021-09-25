@@ -31,7 +31,8 @@ const FriendRequests = () => {
 
   return (
     <div className={styles.friend_requests}>
-      {state.requests && (
+      {state.requests &&
+      state.requests.filter((request) => request.status != 3).length > 0 ? (
         <ul className={styles.friend_requests_list}>
           {state.requests.map((obj) => {
             switch (obj.status) {
@@ -80,6 +81,8 @@ const FriendRequests = () => {
             }
           })}
         </ul>
+      ) : (
+        <p>There are no requests</p>
       )}
     </div>
   );

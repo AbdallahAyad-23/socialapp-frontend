@@ -96,7 +96,11 @@ const Post = ({ post }) => {
           />
           <div className={post.creation}>
             <h4>{post.userId.username}</h4>
-            <p className={styles.post_date}>{post.createdAt}</p>
+            <p className={styles.post_date}>
+              {DateTime.fromISO(post.createdAt).toLocaleString(
+                DateTime.DATETIME_MED
+              )}
+            </p>
           </div>
         </div>
         {state.user._id == post.userId._id && (

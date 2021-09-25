@@ -47,7 +47,6 @@ const Users = () => {
       setUsers(res.data.users);
     });
     if (!state.requests) {
-      console.log("it should");
       axios.get("/user/friends").then((res) => {
         const friendRequests = res.data;
         dispatch({ type: "SET_REQUESTS", payload: { friendRequests } });

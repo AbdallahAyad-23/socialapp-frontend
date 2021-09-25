@@ -18,7 +18,15 @@ const Home = () => {
       <CreatePost />
       <ul className={styles.posts}>
         {state.posts &&
-          state.posts.map((post) => <Post key={post._id} post={post} />)}
+          state.posts
+            .sort(function (a, b) {
+              return a.createdAt < b.createdAt
+                ? 1
+                : a.createdAt > b.createdAt
+                ? -1
+                : 0;
+            })
+            .map((post) => <Post key={post._id} post={post} />)}
       </ul>
     </div>
   );

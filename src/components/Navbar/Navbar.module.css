@@ -28,6 +28,28 @@
   gap: 10px;
   align-items: center;
 }
+.side_bar {
+  width: 150px;
+  background: #161a1d;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 2;
+}
+.side_bar_items {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.side_bar_btn {
+  color: white;
+  display: none;
+}
 .btn {
   color: #fff;
   font: inherit;
@@ -46,4 +68,16 @@
 .profile_link {
   height: 40px;
   display: block;
+}
+
+@media (max-width: 500px) {
+  .navbar {
+    display: none;
+  }
+  .profile_link {
+    margin-top: 10px;
+  }
+  .side_bar_btn {
+    display: block;
+  }
 }

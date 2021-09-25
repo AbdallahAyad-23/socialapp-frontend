@@ -38,3 +38,8 @@
   height: 1px;
   background: #d3d3d365;
 }
+@media (max-width: 500px) {
+  .signup_form {
+    width: 100%;
+  }
+}

@@ -77,14 +77,22 @@ const Comments = ({ post, comments, setComments }) => {
       )}
       <ul className={`${comments ? styles.comments_list : styles.spinner_div}`}>
         {comments ? (
-          comments.map((comment) => (
-            <Comment
-              comment={comment}
-              deleteComment={deleteComment}
-              editComment={editComment}
-              key={comment._id}
-            />
-          ))
+          comments
+            .sort(function (a, b) {
+              return a.createdAt < b.createdAt
+                ? 1
+                : a.createdAt > b.createdAt
+                ? -1
+                : 0;
+            })
+            .map((comment) => (
+              <Comment
+                comment={comment}
+                deleteComment={deleteComment}
+                editComment={editComment}
+                key={comment._id}
+              />
+            ))
         ) : (
           <Spinner />
         )}

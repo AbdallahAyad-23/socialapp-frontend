@@ -37,3 +37,10 @@
   color: #e5383b;
   background: #d3d3d365;
 }
+
+@media (max-width: 500px) {
+  .form {
+    width: 100%;
+    border-radius: 0px;
+  }
+}

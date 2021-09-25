@@ -60,3 +60,9 @@
 .post i:hover {
   cursor: pointer;
 }
+
+@media (max-width: 500px) {
+  .post {
+    width: 100%;
+  }
+}
