@@ -8,7 +8,7 @@ const Navbar = () => {
   const { state, dispatch } = useContext(AuthContext);
   const [showRequests, setShowRequests] = useState(false);
   const [showSideBar, setShowSideBar] = useState(false);
-  const navbar =
+  const navbar = (mobile) =>
     state.isAuth && state.user ? (
       <>
         <li>
@@ -21,16 +21,18 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/users">Users</NavLink>
+          <NavLink to="/users">{mobile ? "Users & Requests" : "Users"}</NavLink>
         </li>
-        <li>
-          <button
-            onClick={() => setShowRequests((prevShow) => !prevShow)}
-            className={styles.btn}
-          >
-            Requests
-          </button>
-        </li>
+        {!mobile && (
+          <li>
+            <button
+              onClick={() => setShowRequests((prevShow) => !prevShow)}
+              className={styles.btn}
+            >
+              Requests
+            </button>
+          </li>
+        )}
         <li>
           <button
             onClick={() => dispatch({ type: "LOGOUT" })}
@@ -57,7 +59,7 @@ const Navbar = () => {
           <div className={styles.nav_header}>
             <NavLink to={state.isAuth ? "/" : "#"}>Connect</NavLink>
           </div>
-          <ul className={styles.navbar}>{navbar}</ul>
+          <ul className={styles.navbar}>{navbar(false)}</ul>
           <i
             className={`fas fa-bars ${styles.side_bar_btn}`}
             onClick={() => setShowSideBar(true)}
@@ -69,7 +71,7 @@ const Navbar = () => {
         <>
           <Backdrop setShow={setShowSideBar} />
           <div className={styles.side_bar}>
-            <ul className={styles.side_bar_items}>{navbar}</ul>
+            <ul className={styles.side_bar_items}>{navbar(true)}</ul>
           </div>
         </>
       )}
